@@ -1,5 +1,4 @@
-import { BarChart3, Map as MapIcon, Layers, AlertCircle, LogOut, User } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { BarChart3, Map as MapIcon, Layers, AlertCircle } from 'lucide-react';
 
 interface SidebarProps {
   onItemClick: (id: string) => void;
@@ -7,7 +6,6 @@ interface SidebarProps {
 }
 
 export function Sidebar({ onItemClick, activePanel }: SidebarProps) {
-  const { user, signOut } = useAuth();
 
   const menuItems = [
     { id: 'map' as const, label: 'Vista del Mapa', icon: MapIcon },
@@ -54,27 +52,7 @@ export function Sidebar({ onItemClick, activePanel }: SidebarProps) {
         })}
       </nav>
 
-      <div className="p-4 border-t border-gray-200 space-y-2">
-        <div className="flex items-center gap-3 px-4 py-3 bg-gray-50 rounded-lg">
-          <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-            <User className="w-4 h-4 text-gray-600" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate">
-              {user?.email?.split('@')[0] || 'User'}
-            </p>
-            <p className="text-xs text-gray-500 truncate">{user?.email}</p>
-          </div>
-        </div>
 
-        <button
-          onClick={signOut}
-          className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-        >
-          <LogOut className="w-5 h-5" />
-          <span className="font-medium">Cerrar Sesión</span>
-        </button>
-      </div>
     </div>
   );
 }
